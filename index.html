@@ -1,0 +1,2852 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Неделя технолидерства · v2 «Лабораторный журнал»</title>
+  <meta name="description" content="Всероссийский семейный форум «Неделя технолидерства». 16–26 июня 2026. Бесплатное участие для зрителей. Каждый зарегистрированный — первый держатель Кулибинской карты." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============ DS v5 TOKENS (canonical) ============ */
+    :root {
+      --paper:        #F4EFE6;
+      --paper-cool:   #F2F4F8;
+      --ink:          #14181F;
+      --ink-deep:     #0A0F1B;
+      --ink-darker:   #060F26;
+      --cinnabar:     #B8341E;
+      --cinnabar-soft:#D85539;
+      --sepia:        #C9A050;
+      --moss:         #4A6B3A;
+      --rule:         #DDD6C9;
+      --rule-cool:    #C9D2E0;
+
+      --font-display: 'PT Serif', Georgia, serif;
+      --font-body:    'Onest', -apple-system, sans-serif;
+      --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+
+      --shadow-card: 0 24px 64px rgba(10, 15, 27, 0.18);
+      --shadow-pop:  0 40px 80px rgba(10, 15, 27, 0.28);
+    }
+
+    /* ============ Reset ============ */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img, svg { display: block; max-width: 100%; }
+    button, input { font: inherit; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ============ Global noise overlay (SVG-generated) ============ */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.4;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0 0.04 0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    }
+
+    /* ============ Container ============ */
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+      position: relative;
+      z-index: 2;
+    }
+    @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+    }
+
+    /* ============ Type ============ */
+    .display-xl {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(44px, 9vw, 124px);
+      line-height: 0.92;
+      letter-spacing: -0.035em;
+      margin: 0;
+    }
+    .display-l {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(36px, 6vw, 88px);
+      line-height: 0.96;
+      letter-spacing: -0.025em;
+      margin: 0;
+    }
+    .display-m {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(28px, 4vw, 56px);
+      line-height: 1.05;
+      letter-spacing: -0.018em;
+      margin: 0;
+    }
+    .display-s {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(22px, 2.6vw, 32px);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin: 0;
+    }
+    .mono {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .mono-lg {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ============ Buttons ============ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 28px;
+      border-radius: 12px;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 1;
+      transition: all .25s ease;
+      cursor: pointer;
+      border: none;
+    }
+    .btn--primary {
+      background: var(--cinnabar);
+      color: var(--paper);
+      box-shadow: 0 8px 24px rgba(184, 52, 30, 0.32);
+    }
+    .btn--primary:hover {
+      background: var(--cinnabar-soft);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(184, 52, 30, 0.44);
+    }
+    .btn--ghost {
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(12px);
+      color: inherit;
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .btn--ghost:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: var(--cinnabar-soft);
+    }
+    .btn--xl { padding: 20px 36px; font-size: 18px; }
+    .btn .arrow { transition: transform .2s ease; }
+    .btn:hover .arrow { transform: translateX(4px); }
+
+    /* ============ NAV ============ */
+    .nav {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      width: calc(100% - 32px);
+      max-width: 1280px;
+    }
+    .nav__inner {
+      height: 64px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      background: rgba(244, 239, 230, 0.78);
+      backdrop-filter: blur(20px) saturate(160%);
+      border: 1px solid rgba(20, 24, 31, 0.08);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(10, 15, 27, 0.06);
+    }
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+    }
+    .nav__logo-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--cinnabar);
+      display: grid;
+      place-items: center;
+      color: var(--paper);
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.18);
+    }
+    .nav__menu {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav__menu a {
+      font-size: 14px;
+      color: var(--ink);
+      opacity: 0.7;
+      transition: opacity .15s ease;
+    }
+    .nav__menu a:hover { opacity: 1; color: var(--cinnabar); }
+    .nav .btn { padding: 10px 18px; font-size: 14px; }
+    @media (max-width: 880px) { .nav__menu { display: none; } }
+
+    /* ============ HERO — split ink + ambient lab photo ============ */
+    .hero {
+      position: relative;
+      padding: 112px 0 72px;
+      display: grid;
+      align-items: center;
+      background: var(--ink);
+      color: var(--paper);
+      overflow: hidden;
+    }
+    @media (max-width: 768px) {
+      .hero { padding: 96px 0 56px; }
+    }
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        radial-gradient(ellipse 80% 60% at 100% 30%, rgba(184, 52, 30, 0.32), transparent 70%),
+        radial-gradient(ellipse 60% 50% at 0% 100%, rgba(216, 85, 57, 0.18), transparent 70%),
+        linear-gradient(135deg, var(--ink) 0%, var(--ink-deep) 50%, var(--ink-darker) 100%);
+    }
+    .hero__photo {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background-image: url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1800&q=80');
+      background-size: cover;
+      background-position: center right;
+      opacity: 0.22;
+      mix-blend-mode: luminosity;
+      filter: contrast(1.15) saturate(0);
+    }
+    .hero__photo-tint {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      background:
+        linear-gradient(90deg, var(--ink-deep) 30%, transparent 70%),
+        linear-gradient(180deg, transparent 60%, var(--ink-deep));
+    }
+    .hero__blueprint {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(216, 85, 57, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(216, 85, 57, 0.04) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent);
+    }
+
+    .hero__container {
+      position: relative;
+      z-index: 5;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: grid;
+      grid-template-columns: 7fr 5fr;
+      gap: 80px;
+      align-items: center;
+    }
+    @media (max-width: 1024px) {
+      .hero__container { grid-template-columns: 1fr; gap: 48px; }
+    }
+    @media (max-width: 768px) {
+      .hero__container { padding: 0 20px; }
+    }
+
+    /* HERO LEFT */
+    .hero__pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 24px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--paper);
+    }
+    .pill--cinnabar {
+      background: rgba(184, 52, 30, 0.18);
+      border-color: rgba(216, 85, 57, 0.45);
+      color: #FFD9CC;
+    }
+    .pill__dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--cinnabar-soft);
+      box-shadow: 0 0 8px var(--cinnabar-soft);
+    }
+
+    .hero__targeting {
+      font-size: 13px;
+      line-height: 1.5;
+      color: rgba(244, 239, 230, 0.62);
+      margin: 0 0 20px;
+      padding-left: 16px;
+      border-left: 2px solid var(--cinnabar-soft);
+      max-width: 60ch;
+      font-style: italic;
+    }
+    .hero__kicker-mono {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(244, 239, 230, 0.7);
+      margin: 0 0 16px;
+    }
+    .hero__h1 {
+      margin: 0 0 32px;
+      color: var(--paper);
+    }
+    .hero__h1 .accent {
+      color: var(--cinnabar-soft);
+      font-style: italic;
+      font-weight: 400;
+    }
+    .hero__h1 .dot {
+      display: inline-block;
+      width: 0.18em;
+      height: 0.18em;
+      background: var(--cinnabar-soft);
+      border-radius: 50%;
+      vertical-align: baseline;
+      margin-left: 0.04em;
+      box-shadow: 0 0 16px var(--cinnabar-soft);
+    }
+
+    .hero__sub {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 1.3;
+      color: var(--paper);
+      margin: 0 0 20px;
+    }
+    .hero__sub small {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: rgba(244, 239, 230, 0.5);
+      margin-top: 4px;
+      letter-spacing: 0.04em;
+    }
+    .hero__body {
+      font-size: 15px;
+      line-height: 1.6;
+      color: rgba(244, 239, 230, 0.85);
+      margin: 0 0 24px;
+      max-width: 60ch;
+    }
+    .hero__pill-free {
+      display: inline-block;
+      background: var(--cinnabar);
+      color: var(--paper);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 8px 18px;
+      border-radius: 999px;
+      margin: 0 0 28px;
+      box-shadow: 0 6px 20px rgba(184, 52, 30, 0.4);
+    }
+    .hero__footnote {
+      margin-top: 28px;
+      padding-top: 16px;
+      border-top: 1px dashed rgba(244, 239, 230, 0.18);
+      font-size: 12px;
+      line-height: 1.55;
+      color: rgba(244, 239, 230, 0.5);
+      max-width: 64ch;
+      font-style: italic;
+    }
+    .hero__footnote-mark {
+      color: var(--cinnabar-soft);
+      font-style: normal;
+      font-weight: 700;
+      margin-right: 4px;
+    }
+
+    .hero__cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .hero__cta-meta {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: rgba(244, 239, 230, 0.45);
+      margin-left: 8px;
+    }
+
+    /* HERO RIGHT — Mini quiz card (glassmorphism) */
+    .hero__quiz {
+      position: relative;
+      padding: 32px;
+      background: rgba(244, 239, 230, 0.04);
+      backdrop-filter: blur(28px) saturate(140%);
+      border: 1px solid rgba(244, 239, 230, 0.12);
+      border-radius: 24px;
+      box-shadow:
+        0 32px 80px rgba(10, 15, 27, 0.5),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+    .hero__quiz::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(216, 85, 57, 0.4), transparent 50%);
+      z-index: -1;
+      opacity: 0.6;
+    }
+    .quiz__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(244, 239, 230, 0.1);
+    }
+    .quiz__step {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(244, 239, 230, 0.5);
+    }
+    .quiz__step strong { color: var(--cinnabar-soft); }
+    .quiz__progress {
+      width: 60px;
+      height: 4px;
+      background: rgba(244, 239, 230, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .quiz__progress-bar {
+      height: 100%;
+      background: var(--cinnabar-soft);
+      width: 33%;
+      border-radius: 2px;
+      transition: width .4s ease;
+    }
+    .quiz__title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 26px;
+      line-height: 1.15;
+      color: var(--paper);
+      margin: 0 0 24px;
+    }
+    .quiz__options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .quiz__option {
+      padding: 14px 16px;
+      background: rgba(244, 239, 230, 0.04);
+      border: 1px solid rgba(244, 239, 230, 0.12);
+      border-radius: 12px;
+      color: var(--paper);
+      cursor: pointer;
+      transition: all .2s ease;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .quiz__option:hover {
+      background: rgba(216, 85, 57, 0.16);
+      border-color: var(--cinnabar-soft);
+      transform: translateY(-1px);
+    }
+    .quiz__option.is-active {
+      background: rgba(216, 85, 57, 0.24);
+      border-color: var(--cinnabar-soft);
+    }
+    .quiz__option-icon {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+      color: var(--cinnabar-soft);
+      transition: color .2s ease;
+    }
+    .quiz__option:hover .quiz__option-icon,
+    .quiz__option.is-active .quiz__option-icon {
+      color: var(--paper);
+    }
+    .quiz__result {
+      margin-top: 16px;
+      padding: 16px;
+      background: rgba(184, 52, 30, 0.18);
+      border-left: 2px solid var(--cinnabar-soft);
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--paper);
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity .35s ease, max-height .35s ease, margin-top .35s ease;
+    }
+    .quiz__result.is-visible {
+      opacity: 1;
+      max-height: 280px;
+    }
+    .quiz__result strong {
+      color: var(--cinnabar-soft);
+      font-weight: 600;
+    }
+
+    /* Floating badges with parallax */
+    .floating-stats {
+      position: absolute;
+      z-index: 6;
+      pointer-events: none;
+    }
+    .floating-stats--tl { top: 14%; left: 6%; }
+    .floating-stats--br { bottom: 18%; right: 6%; }
+    .float-chip {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 12px 18px;
+      background: rgba(244, 239, 230, 0.06);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(216, 85, 57, 0.32);
+      border-radius: 999px;
+      transition: transform .6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .float-chip__num {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--cinnabar-soft);
+    }
+    .float-chip__label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(244, 239, 230, 0.7);
+    }
+    @media (max-width: 1024px) {
+      .floating-stats { display: none; }
+    }
+
+    /* ============ SLOGAN diagonal split ============ */
+    .slogan {
+      position: relative;
+      padding: 72px 0;
+      background: var(--ink-deep);
+      color: var(--paper);
+      overflow: hidden;
+    }
+    .slogan::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--cinnabar);
+      clip-path: polygon(60% 0, 100% 0, 100% 100%, 78% 100%);
+      z-index: 1;
+    }
+    .slogan__container {
+      position: relative;
+      z-index: 2;
+    }
+    .slogan__kicker {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cinnabar-soft);
+      margin: 0 0 20px;
+    }
+    .slogan__h2 {
+      max-width: 900px;
+    }
+    .slogan__h2 .em {
+      color: var(--cinnabar-soft);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    /* ============ STATS PARALLAX BAND ============ */
+    .stats-band {
+      position: relative;
+      padding: 64px 0;
+      background: var(--paper);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      overflow: hidden;
+    }
+    .stats-band__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(20, 24, 31, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(20, 24, 31, 0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(ellipse at center, black, transparent 80%);
+    }
+    .stats-band__grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+    @media (max-width: 880px) {
+      .stats-band__grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+    }
+    .stat {
+      position: relative;
+    }
+    .stat__num {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(64px, 8vw, 120px);
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+      margin: 0 0 12px;
+    }
+    .stat__num .plus {
+      font-size: 0.5em;
+      color: var(--cinnabar);
+      vertical-align: super;
+    }
+    .stat__label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      opacity: 0.6;
+      margin: 0 0 8px;
+    }
+    .stat__hint {
+      font-size: 13px;
+      color: var(--ink);
+      opacity: 0.7;
+      line-height: 1.4;
+    }
+
+    /* ============ DIRECTIONS — interactive blueprint ============ */
+    .directions {
+      padding: 96px 0;
+      background: var(--paper);
+      position: relative;
+    }
+    .directions__head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 32px;
+      margin: 0 0 56px;
+    }
+    @media (max-width: 768px) {
+      .directions__head { grid-template-columns: 1fr; }
+    }
+    .directions__h2 { max-width: 540px; }
+    .directions__intro {
+      font-size: 15px;
+      line-height: 1.6;
+      color: rgba(20, 24, 31, 0.7);
+      max-width: 380px;
+    }
+    .blueprint {
+      position: relative;
+      padding: 32px;
+      background: var(--ink);
+      border-radius: 24px;
+      overflow: hidden;
+      min-height: 480px;
+    }
+    .blueprint__grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(216, 85, 57, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(216, 85, 57, 0.08) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .blueprint__nodes {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px 12px;
+      padding: 20px 8px;
+    }
+    @media (max-width: 1024px) { .blueprint__nodes { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 560px)  { .blueprint__nodes { grid-template-columns: repeat(2, 1fr); } }
+
+    .node {
+      position: relative;
+      padding: 16px;
+      background: rgba(244, 239, 230, 0.03);
+      border: 1px solid rgba(244, 239, 230, 0.1);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all .25s ease;
+      color: rgba(244, 239, 230, 0.85);
+    }
+    .node:hover, .node.is-active {
+      background: rgba(216, 85, 57, 0.16);
+      border-color: var(--cinnabar-soft);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(216, 85, 57, 0.28);
+    }
+    .node__num {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      color: var(--cinnabar-soft);
+      margin: 0 0 8px;
+    }
+    .node__icon {
+      width: 24px;
+      height: 24px;
+      margin-bottom: 12px;
+      color: var(--cinnabar-soft);
+    }
+    .node__name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 1.2;
+      color: var(--paper);
+    }
+
+    .blueprint__readout {
+      position: relative;
+      z-index: 2;
+      margin-top: 24px;
+      padding: 20px;
+      background: rgba(244, 239, 230, 0.04);
+      border-left: 2px solid var(--cinnabar-soft);
+      border-radius: 4px;
+      min-height: 92px;
+    }
+    .blueprint__readout-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(244, 239, 230, 0.5);
+      margin: 0 0 6px;
+    }
+    .blueprint__readout-text {
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--paper);
+      margin: 0;
+    }
+
+    /* ============ AGENDA — horizontal carousel ============ */
+    .agenda {
+      padding: 96px 0;
+      background: var(--ink-deep);
+      color: var(--paper);
+      position: relative;
+      overflow: hidden;
+    }
+    .agenda__bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(216, 85, 57, 0.18), transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(184, 52, 30, 0.14), transparent 50%);
+      z-index: 0;
+    }
+    .agenda__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin: 0 0 48px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+    }
+    .agenda__nav {
+      display: flex;
+      gap: 8px;
+    }
+    .agenda__btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(244, 239, 230, 0.06);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(244, 239, 230, 0.16);
+      color: var(--paper);
+      cursor: pointer;
+      transition: all .2s ease;
+      display: grid;
+      place-items: center;
+    }
+    .agenda__btn:hover { background: var(--cinnabar); border-color: var(--cinnabar); }
+    .agenda__btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+    .agenda__track {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 4px 0 24px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--cinnabar-soft) transparent;
+    }
+    .agenda__track::-webkit-scrollbar { height: 4px; }
+    .agenda__track::-webkit-scrollbar-thumb { background: var(--cinnabar-soft); border-radius: 2px; }
+
+    .agenda-card {
+      flex: 0 0 320px;
+      scroll-snap-align: start;
+      padding: 28px;
+      background: rgba(244, 239, 230, 0.04);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(244, 239, 230, 0.1);
+      border-radius: 20px;
+      transition: all .25s ease;
+      cursor: pointer;
+    }
+    .agenda-card:hover {
+      background: rgba(216, 85, 57, 0.12);
+      border-color: var(--cinnabar-soft);
+      transform: translateY(-4px);
+    }
+    .agenda-card__date {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(244, 239, 230, 0.1);
+    }
+    .agenda-card__day-num {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 36px;
+      line-height: 1;
+      color: var(--cinnabar-soft);
+    }
+    .agenda-card__day-meta {
+      flex: 1;
+    }
+    .agenda-card__day-month {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(244, 239, 230, 0.5);
+    }
+    .agenda-card__day-name {
+      font-size: 13px;
+      color: var(--paper);
+      margin-top: 2px;
+    }
+    .agenda-card__title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 19px;
+      line-height: 1.25;
+      color: var(--paper);
+      margin: 0 0 16px;
+    }
+    .agenda-card__meta {
+      font-size: 12px;
+      line-height: 1.5;
+      color: rgba(244, 239, 230, 0.6);
+    }
+    .agenda-card__time {
+      display: inline-block;
+      margin-top: 12px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--cinnabar-soft);
+      padding: 4px 10px;
+      background: rgba(216, 85, 57, 0.14);
+      border-radius: 999px;
+    }
+
+    /* ============ EXPERTS — overlapping cards ============ */
+    .experts {
+      padding: 96px 0;
+      background: var(--paper);
+      position: relative;
+    }
+    .experts__container {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 80px;
+      align-items: center;
+    }
+    @media (max-width: 1024px) {
+      .experts__container { grid-template-columns: 1fr; gap: 48px; }
+    }
+    .experts__text .display-l { margin-bottom: 24px; }
+    .experts__intro {
+      font-size: 17px;
+      line-height: 1.6;
+      color: rgba(20, 24, 31, 0.75);
+      margin: 0 0 32px;
+    }
+    .experts__count {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      background: rgba(184, 52, 30, 0.08);
+      border-left: 2px solid var(--cinnabar);
+      border-radius: 4px;
+    }
+    .experts__count-num {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 32px;
+      color: var(--cinnabar);
+      line-height: 1;
+    }
+    .experts__count-label {
+      font-size: 12px;
+      line-height: 1.4;
+      color: var(--ink);
+      opacity: 0.7;
+    }
+
+    .experts__stack {
+      position: relative;
+      min-height: 480px;
+    }
+    .expert-card {
+      position: absolute;
+      width: 280px;
+      background: var(--paper-cool);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 24px 48px rgba(10, 15, 27, 0.12);
+      transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .35s ease;
+      cursor: pointer;
+      border: 1px solid rgba(20, 24, 31, 0.06);
+    }
+    .expert-card:hover {
+      transform: translateY(-8px) rotate(0deg) !important;
+      box-shadow: var(--shadow-pop);
+      z-index: 10;
+    }
+    .expert-card__photo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--ink-deep), var(--ink));
+      display: grid;
+      place-items: center;
+      color: var(--paper);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 32px;
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .expert-card__photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 50%, rgba(216, 85, 57, 0.32));
+    }
+    .expert-card__name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 1.2;
+      margin: 0 0 6px;
+    }
+    .expert-card__title {
+      font-size: 13px;
+      line-height: 1.4;
+      color: rgba(20, 24, 31, 0.65);
+      margin: 0 0 16px;
+    }
+    .expert-card__track {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cinnabar);
+      padding: 4px 10px;
+      background: rgba(184, 52, 30, 0.08);
+      border-radius: 999px;
+      display: inline-block;
+    }
+    /* Stack positions */
+    .expert-card:nth-child(1) { top: 0;    left: 0;    transform: rotate(-3deg); z-index: 3; }
+    .expert-card:nth-child(2) { top: 60px; left: 200px; transform: rotate(2deg); z-index: 2; }
+    .expert-card:nth-child(3) { top: 200px; left: 80px; transform: rotate(-1deg); z-index: 1; }
+    .expert-card:nth-child(4) { top: 260px; left: 280px; transform: rotate(3deg); z-index: 2; }
+    @media (max-width: 1024px) {
+      .experts__stack { min-height: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      .expert-card { position: static; transform: none !important; width: 100%; }
+    }
+
+    /* ============ KULIBIN CARD section (DS v5 canon) ============ */
+    .kulibin {
+      position: relative;
+      padding: 96px 0;
+      background: var(--paper);
+      overflow: hidden;
+    }
+    .kulibin::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 55%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--ink) 0%, var(--ink-deep) 50%, var(--ink-darker) 100%);
+      clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
+      z-index: 0;
+    }
+    .kulibin__noise {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.5;
+      mix-blend-mode: overlay;
+      z-index: 1;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.4'/></svg>");
+    }
+    .kulibin__container {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 80px;
+      align-items: center;
+    }
+    @media (max-width: 1024px) {
+      .kulibin__container { grid-template-columns: 1fr; gap: 56px; }
+      .kulibin::before { display: none; }
+      .kulibin { background: linear-gradient(180deg, var(--paper) 0%, var(--paper) 40%, var(--ink-deep) 40%, var(--ink-darker) 100%); }
+    }
+    .kulibin__text {
+      color: var(--ink);
+    }
+    .kulibin__kicker {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cinnabar);
+      margin: 0 0 20px;
+    }
+    .kulibin__h2 { margin: 0 0 24px; }
+    .kulibin__lead {
+      font-size: 16px;
+      line-height: 1.55;
+      color: rgba(20, 24, 31, 0.7);
+      margin: 0 0 32px;
+      padding: 16px 20px;
+      background: rgba(20, 24, 31, 0.04);
+      border-left: 2px solid var(--cinnabar);
+      border-radius: 4px;
+    }
+    .kulibin__benefits {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .kulibin__benefits li {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 14px;
+      align-items: start;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    .kulibin__check {
+      width: 22px;
+      height: 22px;
+      color: var(--cinnabar);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* DS v5 canonical Kulibin Virtual Card */
+    .kvc-frame {
+      position: relative;
+      padding: 16px;
+      background: var(--paper-cool);
+      border: 1px solid var(--rule);
+      border-radius: 18px;
+      box-shadow: var(--shadow-pop);
+      max-width: 540px;
+      margin-left: auto;
+    }
+    .kvc-frame__corner {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: var(--paper-cool);
+      border: 1px solid var(--ink);
+    }
+    .kvc-frame__corner--tl { top: -7px; left: -7px; }
+    .kvc-frame__corner--br { bottom: -7px; right: -7px; }
+    .kvc {
+      position: relative;
+      aspect-ratio: 1.586 / 1;
+      background: linear-gradient(135deg, var(--ink) 0%, var(--ink-deep) 60%, var(--ink-darker) 100%);
+      border-radius: 14px;
+      padding: 20px 24px 22px;
+      color: var(--paper);
+      overflow: hidden;
+      box-shadow:
+        0 40px 60px -24px rgba(14, 34, 64, 0.55),
+        0 14px 28px -10px rgba(14, 34, 64, 0.38),
+        inset 0 0 0 1px rgba(216, 85, 57, 0.4),
+        inset 0 1px 0 rgba(242, 244, 248, 0.14);
+      display: flex;
+      flex-direction: column;
+      transition: transform .3s ease;
+      transform: rotateX(4deg) rotateY(-8deg);
+      transform-style: preserve-3d;
+    }
+    .kvc__grid {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(242, 244, 248, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(242, 244, 248, 0.03) 1px, transparent 1px);
+      background-size: 14px 14px;
+      border-radius: 14px;
+    }
+    .kvc__hologram {
+      position: absolute;
+      top: -30%;
+      right: -10%;
+      width: 70%;
+      height: 160%;
+      pointer-events: none;
+      background: linear-gradient(115deg, transparent 30%, rgba(216, 85, 57, 0.16) 45%, rgba(242, 244, 248, 0.12) 50%, rgba(216, 85, 57, 0.18) 55%, transparent 70%);
+      animation: kvcHologram 8s ease-in-out infinite;
+    }
+    @keyframes kvcHologram {
+      0%, 100% { transform: translateX(0); opacity: 1; }
+      50% { transform: translateX(-3%); opacity: 0.85; }
+    }
+    .kvc__gear {
+      position: absolute;
+      right: -50px;
+      bottom: -50px;
+      width: 260px;
+      height: 260px;
+      color: rgba(216, 85, 57, 0.10);
+      animation: kvcGear 60s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes kvcGear {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .kvc__strip {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 40%;
+      height: 18px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.42) 50%, rgba(0,0,0,0.22) 100%);
+      box-shadow: 0 1px 0 rgba(242, 244, 248, 0.06);
+      z-index: 1;
+    }
+    .kvc__top {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .kvc__brand {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(244, 239, 230, 0.55);
+      line-height: 1.3;
+    }
+    .kvc__chip-emblem {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .kvc__chip {
+      width: 32px;
+      height: 24px;
+      background: linear-gradient(135deg, var(--sepia) 0%, #C9A050 50%, var(--sepia) 100%);
+      border-radius: 2px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), inset 0 -1px 0 rgba(0,0,0,0.2);
+      position: relative;
+    }
+    .kvc__chip::before {
+      content: '';
+      position: absolute;
+      inset: 3px 4px;
+      background-image:
+        linear-gradient(rgba(0,0,0,0.25) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.25) 1px, transparent 1px);
+      background-size: 6px 5px;
+      border-radius: 1px;
+    }
+    .kvc__chip::after {
+      content: '';
+      position: absolute;
+      inset: 7px 8px;
+      border: 0.5px solid rgba(0,0,0,0.35);
+      border-radius: 1px;
+    }
+    .kvc__emblem {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 19px;
+      letter-spacing: -0.04em;
+      color: var(--cinnabar-soft);
+      background: rgba(184, 52, 30, 0.16);
+      border: 1.5px solid var(--cinnabar-soft);
+      position: relative;
+      animation: kvcPulse 2.8s ease-in-out infinite;
+    }
+    .kvc__emblem::after {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border: 1px dashed rgba(216, 85, 57, 0.6);
+    }
+    .kvc__emblem span { position: relative; z-index: 1; }
+    @keyframes kvcPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(216,85,57,0), 0 0 12px rgba(216,85,57,0.35); }
+      50%      { box-shadow: 0 0 0 4px rgba(216,85,57,0.15), 0 0 20px rgba(216,85,57,0.55); }
+    }
+    .kvc__title {
+      position: relative;
+      z-index: 2;
+      margin: auto 0 14px;
+    }
+    .kvc__title-text {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(20px, 2.6vw, 26px);
+      line-height: 0.96;
+      letter-spacing: -0.022em;
+      color: var(--paper);
+      text-transform: uppercase;
+    }
+    .kvc__title-text .accent {
+      color: var(--cinnabar-soft);
+      filter: drop-shadow(0 0 6px rgba(216, 85, 57, 0.4));
+    }
+    .kvc__title-row2 {
+      display: block;
+      letter-spacing: 0.02em;
+      margin-top: 2px;
+    }
+    .kvc__owner {
+      position: relative;
+      z-index: 2;
+      margin: 0 0 8px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.04em;
+      color: var(--paper);
+      transition: opacity .2s ease, color .2s ease;
+      min-height: 20px;
+    }
+    .kvc__owner.is-placeholder {
+      color: rgba(244, 239, 230, 0.4);
+      font-weight: 400;
+      font-style: italic;
+      font-size: 13px;
+    }
+    .kvc__bottom {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .kvc__number {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.32em;
+      color: rgba(244, 239, 230, 0.95);
+      text-shadow: 0 1px 0 rgba(0,0,0,0.45);
+    }
+    .kvc__radial {
+      position: relative;
+      width: 64px;
+      height: 64px;
+      flex-shrink: 0;
+    }
+    .kvc__radial svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+    .kvc__radial-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(244, 239, 230, 0.7);
+    }
+    .kvc__radial-text b {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: -0.02em;
+      color: var(--paper);
+    }
+    .kvc__radial-text small {
+      font-size: 8px;
+      letter-spacing: 0.04em;
+      color: rgba(244, 239, 230, 0.5);
+      margin-top: 1px;
+      font-family: var(--font-body);
+      text-transform: lowercase;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .kvc__hologram, .kvc__gear, .kvc__emblem { animation: none !important; }
+    }
+
+    /* Engraving form below card */
+    .kvc-engrave {
+      max-width: 540px;
+      margin: 24px auto 0 auto;
+      margin-left: auto;
+    }
+    .kvc-engrave__label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(244, 239, 230, 0.6);
+      margin: 0 0 8px;
+    }
+    .kvc-engrave__input {
+      width: 100%;
+      padding: 14px 18px;
+      background: rgba(244, 239, 230, 0.04);
+      border: 1px solid rgba(244, 239, 230, 0.18);
+      border-radius: 12px;
+      color: var(--paper);
+      font-size: 16px;
+      transition: all .15s ease;
+    }
+    .kvc-engrave__input:focus {
+      outline: none;
+      border-color: var(--cinnabar-soft);
+      background: rgba(244, 239, 230, 0.06);
+    }
+    .kvc-engrave__hint {
+      font-size: 12px;
+      color: rgba(244, 239, 230, 0.5);
+      margin: 8px 0 0;
+    }
+
+    /* ============ MANIFESTO mission ============ */
+    .manifesto {
+      position: relative;
+      padding: 96px 0;
+      color: var(--paper);
+      background: var(--ink);
+      overflow: hidden;
+    }
+    .manifesto__photo {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background-image: url('https://images.unsplash.com/photo-1581094271901-8022df4466f9?auto=format&fit=crop&w=1800&q=80');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.18;
+      mix-blend-mode: luminosity;
+      filter: contrast(1.1) saturate(0);
+    }
+    .manifesto__overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background:
+        radial-gradient(ellipse 60% 40% at 0% 50%, rgba(184, 52, 30, 0.32), transparent 60%),
+        linear-gradient(90deg, var(--ink) 30%, rgba(20, 24, 31, 0.7) 70%);
+    }
+    .manifesto__container {
+      position: relative;
+      z-index: 3;
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 80px;
+      align-items: start;
+    }
+    @media (max-width: 1024px) {
+      .manifesto__container { grid-template-columns: 1fr; gap: 40px; }
+    }
+    .manifesto__title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(40px, 5vw, 72px);
+      line-height: 0.95;
+      letter-spacing: -0.025em;
+      color: var(--cinnabar-soft);
+      margin: 0;
+    }
+    .manifesto__body p {
+      font-size: 18px;
+      line-height: 1.55;
+      color: var(--paper);
+      margin: 0 0 24px;
+      padding: 16px 20px;
+      background: rgba(20, 24, 31, 0.5);
+      backdrop-filter: blur(14px);
+      border-left: 2px solid rgba(216, 85, 57, 0.5);
+      border-radius: 4px;
+    }
+    .manifesto__pull {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(22px, 2.6vw, 30px);
+      line-height: 1.25;
+      letter-spacing: -0.012em;
+      color: var(--cinnabar-soft);
+      margin: 24px 0 0;
+      padding: 24px 0 0;
+      border-top: 2px solid var(--cinnabar);
+    }
+    .manifesto__pull::before { content: '«'; }
+    .manifesto__pull::after { content: '»'; }
+
+    /* ============ WHY — persona toggle ============ */
+    .why {
+      padding: 96px 0;
+      background: var(--paper);
+    }
+    .why__head { text-align: center; margin: 0 0 48px; }
+    .why__head .display-l { margin: 0 auto 16px; max-width: 800px; }
+    .why__sub {
+      font-size: 16px;
+      color: rgba(20, 24, 31, 0.65);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .why__tabs {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 0 0 48px;
+      flex-wrap: wrap;
+    }
+    .why__tab {
+      padding: 12px 22px;
+      background: transparent;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+      cursor: pointer;
+      transition: all .2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .why__tab:hover { border-color: var(--cinnabar); }
+    .why__tab.is-active {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+    .why__tab-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      color: currentColor;
+    }
+    .why__panel {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 48px;
+      background: var(--paper-cool);
+      border-radius: 24px;
+      border: 1px solid var(--rule);
+      transition: opacity .3s ease;
+    }
+    @media (max-width: 768px) { .why__panel { padding: 28px 24px; } }
+    .why__panel.is-fading { opacity: 0; }
+    .why__panel-h {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 1.2;
+      margin: 0 0 24px;
+      letter-spacing: -0.01em;
+    }
+    .why__panel-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .why__panel-list li {
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 14px;
+      align-items: start;
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+    .why__bullet {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(184, 52, 30, 0.1);
+      color: var(--cinnabar);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 13px;
+      display: grid;
+      place-items: center;
+    }
+
+    /* ============ INLINE STRIPES (compact) ============ */
+    .stripe {
+      padding: 32px 0;
+      background: var(--paper-cool);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .stripe--ink {
+      background: var(--ink-deep);
+      color: var(--paper);
+      border-color: rgba(244, 239, 230, 0.06);
+    }
+    .stripe__row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .stripe__title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(22px, 2.4vw, 28px);
+      line-height: 1.15;
+      letter-spacing: -0.012em;
+      margin: 0;
+    }
+    .stripe__title .em { color: var(--cinnabar); }
+    .stripe--ink .stripe__title .em { color: var(--cinnabar-soft); }
+
+    .support {
+      padding: 56px 0;
+      background: var(--paper);
+      border-top: 1px solid var(--rule);
+    }
+    .support__head {
+      display: grid;
+      grid-template-columns: minmax(0, 320px) 1fr;
+      gap: 48px;
+      align-items: center;
+      margin: 0 0 24px;
+    }
+    @media (max-width: 768px) {
+      .support__head { grid-template-columns: 1fr; gap: 16px; }
+    }
+    .support__h {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(22px, 2.4vw, 28px);
+      line-height: 1.15;
+      margin: 0;
+    }
+    .support__lead {
+      font-size: 13px;
+      line-height: 1.55;
+      color: rgba(20, 24, 31, 0.65);
+      margin: 0;
+    }
+    .support__logos {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      align-items: center;
+      padding-top: 16px;
+      border-top: 1px solid var(--rule);
+    }
+    @media (max-width: 768px) { .support__logos { grid-template-columns: repeat(2, 1fr); } }
+    .support__logo {
+      height: 44px;
+      display: grid;
+      place-items: center;
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: center;
+      color: var(--ink);
+      opacity: 0.45;
+      filter: grayscale(1);
+      transition: opacity .2s ease;
+      padding: 0 8px;
+    }
+    .support__logo:hover { opacity: 0.75; }
+    .support__note {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--ink);
+      opacity: 0.4;
+      margin: 12px 0 0;
+      text-align: center;
+    }
+
+    /* ============ FINAL CTA ============ */
+    .final {
+      position: relative;
+      padding: 112px 0;
+      background: var(--ink);
+      color: var(--paper);
+      overflow: hidden;
+      text-align: center;
+    }
+    .final__bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 100%, rgba(184, 52, 30, 0.4), transparent 70%),
+        linear-gradient(180deg, var(--ink-deep) 0%, var(--ink) 100%);
+    }
+    .final__container {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .final__counter {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 12px 24px;
+      background: rgba(184, 52, 30, 0.16);
+      border: 1px solid rgba(216, 85, 57, 0.45);
+      border-radius: 999px;
+      margin: 0 0 32px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(244, 239, 230, 0.85);
+    }
+    .final__counter strong {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--cinnabar-soft);
+      letter-spacing: 0;
+    }
+    .final__h {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(40px, 6vw, 88px);
+      line-height: 0.96;
+      letter-spacing: -0.028em;
+      color: var(--paper);
+      margin: 0 0 24px;
+    }
+    .final__h .accent { color: var(--cinnabar-soft); }
+    .final__sub {
+      font-size: 18px;
+      line-height: 1.5;
+      color: rgba(244, 239, 230, 0.75);
+      margin: 0 0 40px;
+    }
+    .final__micro {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: rgba(244, 239, 230, 0.4);
+      margin: 24px 0 0;
+    }
+    .final .btn--primary {
+      animation: finalPulse 4s ease-in-out infinite;
+    }
+    @keyframes finalPulse {
+      0%, 100% { transform: scale(1); }
+      50%      { transform: scale(1.025); box-shadow: 0 16px 48px rgba(184, 52, 30, 0.5); }
+    }
+
+    /* ============ FOOTER ============ */
+    .footer {
+      padding: 64px 0 40px;
+      background: var(--ink-darker);
+      color: rgba(244, 239, 230, 0.7);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin: 0 0 48px;
+    }
+    @media (max-width: 768px) { .footer__grid { grid-template-columns: 1fr 1fr; } }
+    .footer__col h4 {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(244, 239, 230, 0.5);
+      margin: 0 0 16px;
+    }
+    .footer__col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+    .footer__col a { color: var(--paper); transition: color .15s ease; }
+    .footer__col a:hover { color: var(--cinnabar-soft); }
+    .footer__strip {
+      padding-top: 24px;
+      border-top: 1px solid rgba(244, 239, 230, 0.1);
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: rgba(244, 239, 230, 0.45);
+    }
+
+    /* ============ Reveal anims ============ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .8s cubic-bezier(0.16, 1, 0.3, 1), transform .8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.is-visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ============ Draft notice ============ */
+    .draft-banner {
+      position: fixed;
+      bottom: 12px;
+      right: 12px;
+      padding: 8px 14px;
+      background: rgba(20, 24, 31, 0.92);
+      backdrop-filter: blur(8px);
+      color: var(--paper);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      border: 1px solid rgba(216, 85, 57, 0.5);
+      border-radius: 999px;
+      z-index: 200;
+      text-transform: uppercase;
+    }
+    .draft-banner strong { color: var(--cinnabar-soft); }
+  </style>
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo">
+        <span class="nav__logo-mark">К</span>
+        <span>Платформа технолидерства</span>
+      </a>
+      <ul class="nav__menu">
+        <li><a href="#program">Программа</a></li>
+        <li><a href="#agenda">11 дней</a></li>
+        <li><a href="#card">Карта</a></li>
+        <li><a href="#why">Зачем</a></li>
+      </ul>
+      <a href="#register" class="btn btn--primary">Записаться <span class="arrow">→</span></a>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="hero__bg"></div>
+    <div class="hero__photo"></div>
+    <div class="hero__photo-tint"></div>
+    <div class="hero__blueprint"></div>
+
+    <!-- Static floating stat chips (no parallax) -->
+    <div class="floating-stats floating-stats--tl">
+      <div class="float-chip">
+        <span class="float-chip__num">11</span>
+        <span class="float-chip__label">дней</span>
+      </div>
+    </div>
+    <div class="floating-stats floating-stats--br">
+      <div class="float-chip">
+        <span class="float-chip__num">25</span>
+        <span class="float-chip__label">направлений</span>
+      </div>
+    </div>
+
+    <div class="hero__container">
+      <!-- LEFT: text + CTA -->
+      <div class="hero__left">
+        <!-- T2 verbatim — описание ЦА -->
+        <p class="hero__targeting reveal">
+          Родителей школьников и&nbsp;выпускников, юношей и&nbsp;девушек,
+          стремящихся построить успешную инженерную и&nbsp;техническую карьеру
+          на&nbsp;базе продвинутого технологического образования и&nbsp;стать
+          востребованными специалистами на&nbsp;рынке труда —
+        </p>
+
+        <!-- T3 verbatim -->
+        <p class="hero__kicker-mono reveal">приглашаем на&nbsp;всероссийский семейный форум</p>
+
+        <!-- T4 verbatim — H1 -->
+        <h1 class="display-xl hero__h1 reveal">
+          Неделя<br/>
+          техно<span class="accent">лидерства</span><span class="dot"></span>
+        </h1>
+
+        <!-- T5 + T9 verbatim — sub -->
+        <p class="hero__sub reveal">
+          В&nbsp;формате открытых онлайн-эфиров с&nbsp;16 по&nbsp;26 июня 2026 года.
+          <small>(даты будут уточняться)</small>
+        </p>
+
+        <!-- T6 verbatim -->
+        <p class="hero__body reveal">
+          С&nbsp;обширным объёмом ценнейшей и&nbsp;нужной вам информации,
+          при&nbsp;участии выдающихся экспертов, авторитетных представителей
+          образовательной отрасли и&nbsp;профориентологов, и&nbsp;уникальной
+          возможностью стать первыми обладателями «Кулибинской карты».
+        </p>
+
+        <!-- T7 verbatim — pill -->
+        <div class="reveal"><span class="hero__pill-free">Бесплатное участие для зрителей</span></div>
+
+        <div class="hero__cta-row reveal">
+          <!-- T17 verbatim -->
+          <a href="#register" class="btn btn--primary btn--xl">Посмотреть программу и записаться <span class="arrow">→</span></a>
+          <span class="hero__cta-meta">1 минута на регистрацию</span>
+        </div>
+
+        <!-- T8 verbatim — footnote -->
+        <p class="hero__footnote reveal">
+          <span class="hero__footnote-mark">*</span>
+          «Кулибинская карта» — персональный автоматизированный агрегатор
+          «кулибинских баллов», которые можно обменять на&nbsp;реальные
+          скидки в&nbsp;системе платного технологического образования
+          и&nbsp;консалтинга.
+        </p>
+      </div>
+
+      <!-- RIGHT: Mini quiz card (interactive hook) -->
+      <div class="hero__right reveal">
+        <div class="hero__quiz">
+          <div class="quiz__header">
+            <span class="quiz__step">шаг <strong>1</strong> из 1</span>
+            <div class="quiz__progress"><div class="quiz__progress-bar" id="quizProgress"></div></div>
+          </div>
+          <h3 class="quiz__title">Какая ваша роль на форуме?</h3>
+          <div class="quiz__options" id="quizOptions">
+            <button class="quiz__option" data-role="student">
+              <svg class="quiz__option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M2 9 L12 4 L22 9 L12 14 Z"/>
+                <path d="M6 11 V16 C6 16, 9 18, 12 18 C 15 18, 18 16, 18 16 V11"/>
+                <line x1="22" y1="9" x2="22" y2="14"/>
+              </svg>Школьник
+            </button>
+            <button class="quiz__option" data-role="abiturient">
+              <svg class="quiz__option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 3 H 16 L 19 6 V 21 H 5 Z"/>
+                <path d="M16 3 V6 H19"/>
+                <line x1="8" y1="11" x2="14" y2="11"/>
+                <line x1="8" y1="14" x2="14" y2="14"/>
+                <circle cx="11" cy="18" r="1.6"/>
+              </svg>Абитуриент
+            </button>
+            <button class="quiz__option" data-role="parent">
+              <svg class="quiz__option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="8" cy="6" r="2.5"/>
+                <path d="M3 21 V18 C 3 16, 5 14, 8 14 C 11 14, 13 16, 13 18 V21"/>
+                <circle cx="17" cy="9" r="2"/>
+                <path d="M14 21 V19 C 14 17.5, 15.5 16.5, 17 16.5 C 18.5 16.5, 20 17.5, 20 19 V21"/>
+              </svg>Родитель
+            </button>
+            <button class="quiz__option" data-role="expert">
+              <svg class="quiz__option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="2"/>
+                <ellipse cx="12" cy="12" rx="9" ry="3.5"/>
+                <ellipse cx="12" cy="12" rx="9" ry="3.5" transform="rotate(60 12 12)"/>
+                <ellipse cx="12" cy="12" rx="9" ry="3.5" transform="rotate(-60 12 12)"/>
+              </svg>Эксперт
+            </button>
+          </div>
+          <div class="quiz__result" id="quizResult"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ SLOGAN diagonal split ============ -->
+  <section class="slogan">
+    <div class="container slogan__container">
+      <p class="slogan__kicker reveal">— Социальные проекты, которые строят</p>
+      <h2 class="display-l slogan__h2 reveal">
+        Образовательные траектории<br/>
+        <span class="em">будущих инженеров.</span>
+      </h2>
+    </div>
+  </section>
+
+  <!-- ============ STATS BAND ============ -->
+  <section class="stats-band">
+    <div class="stats-band__bg"></div>
+    <div class="container">
+      <div class="stats-band__grid">
+        <div class="stat reveal">
+          <p class="stat__num" data-count="11">11</p>
+          <p class="stat__label">Дней эфиров</p>
+          <p class="stat__hint">с 16 по 26 июня 2026 года</p>
+        </div>
+        <div class="stat reveal">
+          <p class="stat__num"><span data-count="40">40</span><span class="plus">+</span></p>
+          <p class="stat__label">Экспертов</p>
+          <p class="stat__hint">ректоры, инженеры, профориентологи</p>
+        </div>
+        <div class="stat reveal">
+          <p class="stat__num" data-count="25">25</p>
+          <p class="stat__label">Направлений</p>
+          <p class="stat__hint">от робототехники до биотехнологий</p>
+        </div>
+        <div class="stat reveal">
+          <p class="stat__num" style="color: var(--cinnabar);">0&nbsp;₽</p>
+          <p class="stat__label">Для зрителей</p>
+          <p class="stat__hint">регистрация бесплатна</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DIRECTIONS — interactive blueprint ============ -->
+  <section class="directions" id="program">
+    <div class="container">
+      <div class="directions__head">
+        <div class="reveal">
+          <p class="mono" style="color: var(--cinnabar); margin: 0 0 16px;">Программа · направления</p>
+          <h2 class="display-l directions__h2">Какие направления будут представлены</h2>
+        </div>
+        <p class="directions__intro reveal">
+          На форуме будут представлены ключевые направления развития технологического
+          лидерства страны — всего двадцать пять. Наведите курсор, чтобы увидеть детали.
+        </p>
+      </div>
+
+      <div class="blueprint reveal">
+        <div class="blueprint__grid"></div>
+        <div class="blueprint__nodes" id="blueprintNodes">
+          <button class="node" data-desc="Промышленные манипуляторы, мобильные роботы, автоматизированные системы и&nbsp;учебные платформы для&nbsp;школьников.">
+            <p class="node__num">01 · Robotics</p>
+            <svg class="node__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="5" y="8" width="14" height="10" rx="2"/><circle cx="9" cy="13" r="1.5"/><circle cx="15" cy="13" r="1.5"/><line x1="10" y1="8" x2="10" y2="5"/><line x1="14" y1="8" x2="14" y2="5"/></svg>
+            <p class="node__name">Робототехника</p>
+          </button>
+          <button class="node" data-desc="Системное программирование, веб-разработка, искусственный интеллект и&nbsp;data-инженерия.">
+            <p class="node__num">02 · IT</p>
+            <svg class="node__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="9,8 4,12 9,16"/><polyline points="15,8 20,12 15,16"/></svg>
+            <p class="node__name">ИТ и&nbsp;разработка</p>
+          </button>
+          <button class="node" data-desc="Генная инженерия, медицинское оборудование, протезирование, биоинформатика.">
+            <p class="node__num">03 · Bio</p>
+            <svg class="node__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M8 4 C 8 10, 16 10, 16 16 C 16 19, 13 21, 10 19"/><path d="M16 4 C 16 10, 8 10, 8 16 C 8 19, 11 21, 14 19"/></svg>
+            <p class="node__name">Биотех и&nbsp;медицина</p>
+          </button>
+          <button class="node" data-desc="Конструирование летательных аппаратов, ракетно-космическая техника, орбитальные системы.">
+            <p class="node__num">04 · Aero</p>
+            <svg class="node__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 3 L15 10 L19 21 L12 18 L5 21 L9 10 Z"/></svg>
+            <p class="node__name">Авиация и&nbsp;космос</p>
+          </button>
+          <button class="node" data-desc="Реакторные технологии, ядерная медицина, радиационная безопасность.">
+            <p class="node__num">05 · Atom</p>
+            <svg class="node__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="12" rx="9" ry="4"/><ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(-60 12 12)"/></svg>
+            <p class="node__name">Атом и&nbsp;ядерная инж.</p>
+          </button>
+
+          <button class="node" data-desc="Архитектура, конструкции, инфраструктура мегаполисов и&nbsp;промышленных зон.">
+            <p class="node__num">06 · Build</p>
+            <svg class="node__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="10" width="18" height="11"/><path d="M3 10 L12 3 L21 10"/></svg>
+            <p class="node__name">Строительство</p>
+          </button>
+          <button class="node" data-desc="Энергосистемы, солнечная и&nbsp;ветровая энергетика, водородная экономика.">
+            <p class="node__num">07 · Energy</p>
+            <svg class="node__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M11 3 L6 13 L11 13 L9 21 L18 11 L13 11 L15 3 Z"/></svg>
+            <p class="node__name">Энергетика</p>
+          </button>
+          <button class="node" data-desc="Защита информационных систем, криптография, информационная безопасность.">
+            <p class="node__num">08 · Cyber</p>
+            <svg class="node__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 3 L4 6 V12 C4 17, 8 20, 12 21 C16 20, 20 17, 20 12 V6 Z"/><path d="M9 12 L11 14 L15 10"/></svg>
+            <p class="node__name">Кибербезопасность</p>
+          </button>
+          <button class="node" data-desc="Композиты, наноматериалы, металлургия будущего, аддитивные технологии.">
+            <p class="node__num">09 · Mat</p>
+            <svg class="node__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="9" stroke-dasharray="3 4"/></svg>
+            <p class="node__name">Материалы</p>
+          </button>
+          <button class="node" data-desc="Сенсорные системы, нейроинтерфейсы, протезирование высокого уровня.">
+            <p class="node__num">10 · Neuro</p>
+            <svg class="node__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 4 C 8 6, 8 10, 12 12 C 16 10, 16 6, 12 4 Z"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="9" y1="20" x2="15" y2="20"/></svg>
+            <p class="node__name">Нейротехнологии</p>
+          </button>
+
+          <button class="node" data-desc="Беспилотные транспортные системы, электромобили, инфраструктура мобильности.">
+            <p class="node__num">11 · Trans</p>
+            <svg class="node__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="4" y="8" width="16" height="9" rx="2"/><circle cx="8" cy="19" r="1.5"/><circle cx="16" cy="19" r="1.5"/></svg>
+            <p class="node__name">Транспорт</p>
+          </button>
+          <button class="node" data-desc="Точное земледелие, биотехнологии в&nbsp;агросекторе, дроны и&nbsp;цифровое сельское хозяйство.">
+            <p class="node__num">12 · Agro</p>
+            <svg class="node__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 22 L12 12"/><path d="M12 12 C 8 10, 6 6, 8 4 C 10 4, 14 6, 12 12"/><path d="M12 12 C 16 10, 18 6, 16 4 C 14 4, 10 6, 12 12"/></svg>
+            <p class="node__name">Агроинженерия</p>
+          </button>
+          <button class="node" data-desc="3D-моделирование, аддитивная печать, цифровые двойники изделий.">
+            <p class="node__num">13 · Design</p>
+            <svg class="node__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M3 8 L12 3 L21 8 L21 17 L12 22 L3 17 Z"/><path d="M3 8 L12 13 L21 8"/><line x1="12" y1="13" x2="12" y2="22"/></svg>
+            <p class="node__name">Промдизайн и&nbsp;3D</p>
+          </button>
+          <button class="node" data-desc="Орбитальные системы связи, 5G/6G, квантовые сети.">
+            <p class="node__num">14 · Telecom</p>
+            <svg class="node__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="14" r="2"/><path d="M5 17 C 7 15, 17 15, 19 17"/><path d="M3 14 C 6 11, 18 11, 21 14"/></svg>
+            <p class="node__name">Связь и&nbsp;коммуникации</p>
+          </button>
+          <button class="node" data-desc="+11 направлений: квантовые технологии, экоинженерия, прикладная математика и&nbsp;другие.">
+            <p class="node__num">+11</p>
+            <svg class="node__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <p class="node__name">Ещё 11 направлений</p>
+          </button>
+        </div>
+
+        <div class="blueprint__readout" id="blueprintReadout">
+          <p class="blueprint__readout-label">Описание</p>
+          <p class="blueprint__readout-text">Наведите на&nbsp;любое направление, чтобы увидеть детали трека.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AGENDA — horizontal carousel ============ -->
+  <section class="agenda" id="agenda">
+    <div class="agenda__bg"></div>
+    <div class="container">
+      <div class="agenda__head">
+        <div class="reveal">
+          <p class="mono" style="color: var(--cinnabar-soft); margin: 0 0 16px;">Программа · 11 дней</p>
+          <h2 class="display-l">Каждый вечер<br/>— один разговор<br/>с теми, кто строит.</h2>
+        </div>
+        <div class="agenda__nav">
+          <button class="agenda__btn" id="agendaPrev" aria-label="Предыдущий">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="10,3 5,8 10,13"/></svg>
+          </button>
+          <button class="agenda__btn" id="agendaNext" aria-label="Следующий">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="6,3 11,8 6,13"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="agenda__track" id="agendaTrack">
+        <div class="agenda-card">
+          <div class="agenda-card__date">
+            <span class="agenda-card__day-num">16</span>
+            <div class="agenda-card__day-meta">
+              <p class="agenda-card__day-month">Июнь · Открытие</p>
+              <p class="agenda-card__day-name">Вторник</p>
+            </div>
+          </div>
+          <h3 class="agenda-card__title">Что такое технолидерство в&nbsp;2026 году</h3>
+          <p class="agenda-card__meta">Открытие форума · ректоры технических университетов</p>
+          <span class="agenda-card__time">19:00 МСК · 90 мин</span>
+        </div>
+
+        <div class="agenda-card">
+          <div class="agenda-card__date">
+            <span class="agenda-card__day-num">17</span>
+            <div class="agenda-card__day-meta">
+              <p class="agenda-card__day-month">Июнь · Профориентация</p>
+              <p class="agenda-card__day-name">Среда</p>
+            </div>
+          </div>
+          <h3 class="agenda-card__title">Как выбрать инженерное направление по&nbsp;типу мышления ребёнка</h3>
+          <p class="agenda-card__meta">Ведущие профориентологи и&nbsp;психологи страны</p>
+          <span class="agenda-card__time">19:00 МСК · 90 мин</span>
+        </div>
+
+        <div class="agenda-card">
+          <div class="agenda-card__date">
+            <span class="agenda-card__day-num">18</span>
+            <div class="agenda-card__day-meta">
+              <p class="agenda-card__day-month">Июнь · Поступление</p>
+              <p class="agenda-card__day-name">Четверг</p>
+            </div>
+          </div>
+          <h3 class="agenda-card__title">Семь практических шагов к&nbsp;поступлению в&nbsp;ведущий технический вуз</h3>
+          <p class="agenda-card__meta">Приёмные комиссии технических университетов</p>
+          <span class="agenda-card__time">19:00 МСК · 90 мин</span>
+        </div>
+
+        <div class="agenda-card">
+          <div class="agenda-card__date">
+            <span class="agenda-card__day-num">19</span>
+            <div class="agenda-card__day-meta">
+              <p class="agenda-card__day-month">Июнь · Робототехника</p>
+              <p class="agenda-card__day-name">Пятница</p>
+            </div>
+          </div>
+          <h3 class="agenda-card__title">Робототехника: от&nbsp;школьных кружков к&nbsp;промышленным манипуляторам</h3>
+          <p class="agenda-card__meta">Руководители конструкторских бюро</p>
+          <span class="agenda-card__time">19:00 МСК · 90 мин</span>
+        </div>
+
+        <div class="agenda-card">
+          <div class="agenda-card__date">
+            <span class="agenda-card__day-num">20</span>
+            <div class="agenda-card__day-meta">
+              <p class="agenda-card__day-month">Июнь · Олимпиады</p>
+              <p class="agenda-card__day-name">Суббота</p>
+            </div>
+          </div>
+          <h3 class="agenda-card__title">Олимпиадная подготовка без&nbsp;выгорания: семейная стратегия</h3>
+          <p class="agenda-card__meta">Тренеры олимпиадных сборных, психологи</p>
+          <span class="agenda-card__time">13:00 МСК · 90 мин</span>
+        </div>
+
+        <div class="agenda-card">
+          <div class="agenda-card__date">
+            <span class="agenda-card__day-num">21</span>
+            <div class="agenda-card__day-meta">
+              <p class="agenda-card__day-month">Июнь · Кружки</p>
+              <p class="agenda-card__day-name">Воскресенье</p>
+            </div>
+          </div>
+          <h3 class="agenda-card__title">Кружковое движение и&nbsp;кванториумы: как использовать с&nbsp;пользой</h3>
+          <p class="agenda-card__meta">Руководители центров «Кванториум»</p>
+          <span class="agenda-card__time">13:00 МСК · 90 мин</span>
+        </div>
+
+        <div class="agenda-card">
+          <div class="agenda-card__date">
+            <span class="agenda-card__day-num">22</span>
+            <div class="agenda-card__day-meta">
+              <p class="agenda-card__day-month">Июнь · Карьера</p>
+              <p class="agenda-card__day-name">Понедельник</p>
+            </div>
+          </div>
+          <h3 class="agenda-card__title">Карта профессий новой индустрии: где будет работать инженер в&nbsp;2030 году</h3>
+          <p class="agenda-card__meta">Представители государственных корпораций</p>
+          <span class="agenda-card__time">19:00 МСК · 90 мин</span>
+        </div>
+
+        <div class="agenda-card">
+          <div class="agenda-card__date">
+            <span class="agenda-card__day-num">23</span>
+            <div class="agenda-card__day-meta">
+              <p class="agenda-card__day-month">Июнь · ИТ</p>
+              <p class="agenda-card__day-name">Вторник</p>
+            </div>
+          </div>
+          <h3 class="agenda-card__title">Информационные технологии: с&nbsp;чего начать школьнику и&nbsp;куда дойти</h3>
+          <p class="agenda-card__meta">Ведущие ИТ-специалисты и&nbsp;преподаватели</p>
+          <span class="agenda-card__time">19:00 МСК · 90 мин</span>
+        </div>
+
+        <div class="agenda-card">
+          <div class="agenda-card__date">
+            <span class="agenda-card__day-num">24</span>
+            <div class="agenda-card__day-meta">
+              <p class="agenda-card__day-month">Июнь · Авиа/космос</p>
+              <p class="agenda-card__day-name">Среда</p>
+            </div>
+          </div>
+          <h3 class="agenda-card__title">Авиация и&nbsp;космос: путь от&nbsp;школьной модели до&nbsp;настоящего КБ</h3>
+          <p class="agenda-card__meta">Инженеры аэрокосмических предприятий</p>
+          <span class="agenda-card__time">19:00 МСК · 90 мин</span>
+        </div>
+
+        <div class="agenda-card">
+          <div class="agenda-card__date">
+            <span class="agenda-card__day-num">25</span>
+            <div class="agenda-card__day-meta">
+              <p class="agenda-card__day-month">Июнь · Бизнес</p>
+              <p class="agenda-card__day-name">Четверг</p>
+            </div>
+          </div>
+          <h3 class="agenda-card__title">Технологическое предпринимательство для&nbsp;школьников: с&nbsp;чего начать</h3>
+          <p class="agenda-card__meta">Основатели технологических стартапов</p>
+          <span class="agenda-card__time">19:00 МСК · 90 мин</span>
+        </div>
+
+        <div class="agenda-card">
+          <div class="agenda-card__date">
+            <span class="agenda-card__day-num">26</span>
+            <div class="agenda-card__day-meta">
+              <p class="agenda-card__day-month">Июнь · Закрытие</p>
+              <p class="agenda-card__day-name">Пятница</p>
+            </div>
+          </div>
+          <h3 class="agenda-card__title">Семейная стратегия выбора профессии. Закрытие форума.</h3>
+          <p class="agenda-card__meta">Экспертный совет Платформы технолидерства</p>
+          <span class="agenda-card__time">19:00 МСК · 120 мин</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EXPERTS overlapping ============ -->
+  <section class="experts">
+    <div class="container">
+      <div class="experts__container">
+        <div class="experts__text reveal">
+          <p class="mono" style="color: var(--cinnabar); margin: 0 0 16px;">Спикеры · профессионалы отрасли</p>
+          <h2 class="display-l">Кто будет<br/>выступать.</h2>
+          <!-- [ДОБАВЛЕНИЕ G3 — компактная версия] -->
+          <p class="experts__intro">
+            Ректоры ведущих технических университетов, руководители конструкторских бюро,
+            ведущие профориентологи, представители государственных корпораций
+            и&nbsp;Экспертного совета Платформы технолидерства.
+          </p>
+          <div class="experts__count">
+            <span class="experts__count-num">40+</span>
+            <span class="experts__count-label">экспертов на&nbsp;форуме<br/>имена будут опубликованы по&nbsp;мере подтверждений</span>
+          </div>
+        </div>
+
+        <div class="experts__stack reveal">
+          <article class="expert-card">
+            <div class="expert-card__photo">М</div>
+            <h3 class="expert-card__name">Дмитрий А. Махотин</h3>
+            <p class="expert-card__title">Кандидат педагогических наук, эксперт по&nbsp;технологическому образованию</p>
+            <span class="expert-card__track">Профориентация · 17.06</span>
+          </article>
+          <article class="expert-card">
+            <div class="expert-card__photo">Р</div>
+            <h3 class="expert-card__name">Имя — будет уточнено</h3>
+            <p class="expert-card__title">Ректор технического университета</p>
+            <span class="expert-card__track">Открытие · 16.06</span>
+          </article>
+          <article class="expert-card">
+            <div class="expert-card__photo">К</div>
+            <h3 class="expert-card__name">Имя — будет уточнено</h3>
+            <p class="expert-card__title">Руководитель конструкторского бюро</p>
+            <span class="expert-card__track">Робототехника · 19.06</span>
+          </article>
+          <article class="expert-card">
+            <div class="expert-card__photo">А</div>
+            <h3 class="expert-card__name">Имя — будет уточнено</h3>
+            <p class="expert-card__title">Инженер аэрокосмического предприятия</p>
+            <span class="expert-card__track">Авиация · 24.06</span>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ KULIBIN CARD (DS v5) ============ -->
+  <section class="kulibin" id="card">
+    <div class="kulibin__noise"></div>
+    <div class="container kulibin__container">
+      <div class="kulibin__text reveal">
+        <p class="kulibin__kicker">Только для первых участников форума</p>
+        <h2 class="display-l kulibin__h2">«Кулибинская<br/>карта»</h2>
+        <!-- T8 verbatim -->
+        <p class="kulibin__lead">
+          Персональный автоматизированный агрегатор «кулибинских баллов»,
+          которые можно обменять на&nbsp;реальные скидки в&nbsp;системе платного
+          технологического образования и&nbsp;консалтинга.
+        </p>
+
+        <ul class="kulibin__benefits">
+          <li>
+            <svg class="kulibin__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,12 10,18 20,6"/></svg>
+            <span>Скидки у&nbsp;партнёров — кружков, кванториумов, онлайн-школ</span>
+          </li>
+          <li>
+            <svg class="kulibin__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,12 10,18 20,6"/></svg>
+            <span>Закрытые эфиры с&nbsp;экспертами после&nbsp;форума</span>
+          </li>
+          <li>
+            <svg class="kulibin__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,12 10,18 20,6"/></svg>
+            <span>Накопительные баллы за&nbsp;участие, посещение, выполнение заданий</span>
+          </li>
+          <li>
+            <svg class="kulibin__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,12 10,18 20,6"/></svg>
+            <span>Обмен баллов на&nbsp;услуги платного образования и&nbsp;консалтинга</span>
+          </li>
+        </ul>
+
+        <a href="#register" class="btn btn--primary">Получить карту <span class="arrow">→</span></a>
+      </div>
+
+      <div class="kulibin__visual reveal">
+        <!-- DS v5 canonical KulibinVirtualCard -->
+        <div class="kvc-frame">
+          <span class="kvc-frame__corner kvc-frame__corner--tl"></span>
+          <span class="kvc-frame__corner kvc-frame__corner--br"></span>
+          <div class="kvc" id="kvc">
+            <div class="kvc__grid"></div>
+            <div class="kvc__hologram"></div>
+            <svg class="kvc__gear" viewBox="0 0 100 100" fill="none">
+              <g stroke="currentColor" stroke-width="1.6" fill="none">
+                <circle cx="50" cy="50" r="38"/>
+                <circle cx="50" cy="50" r="22"/>
+                <circle cx="50" cy="50" r="6" fill="currentColor"/>
+                <path d="M50 8v8M50 84v8M8 50h8M84 50h8M21 21l5.6 5.6M73.4 73.4l5.6 5.6M21 79l5.6-5.6M73.4 26.6l5.6-5.6"/>
+                <path d="M50 4l-3 6h6zM50 96l-3-6h6zM4 50l6-3v6zM96 50l-6-3v6z" fill="currentColor"/>
+              </g>
+            </svg>
+            <div class="kvc__strip"></div>
+
+            <div class="kvc__top">
+              <div class="kvc__brand">Платформа<br/>Технолидерства</div>
+              <div class="kvc__chip-emblem">
+                <div class="kvc__chip"></div>
+                <div class="kvc__emblem"><span>К</span></div>
+              </div>
+            </div>
+
+            <div class="kvc__title">
+              <span class="kvc__title-text">
+                Кулибин<span class="accent">ская</span>
+                <span class="kvc__title-row2">Карта</span>
+              </span>
+            </div>
+
+            <p class="kvc__owner is-placeholder" id="kvcOwner">введите имя ниже</p>
+
+            <div class="kvc__bottom">
+              <span class="kvc__number" id="kvcNumber">0000 0347</span>
+              <div class="kvc__radial" aria-label="Прогресс уровня">
+                <svg viewBox="0 0 64 64">
+                  <circle cx="32" cy="32" r="28" fill="none" stroke="rgba(242,244,248,0.15)" stroke-width="4"/>
+                  <circle cx="32" cy="32" r="28" fill="none" stroke="var(--cinnabar-soft)" stroke-width="4" stroke-linecap="round" stroke-dasharray="175.93" stroke-dashoffset="175.93" id="kvcRadial" style="transition: stroke-dashoffset .5s ease;"/>
+                </svg>
+                <div class="kvc__radial-text">
+                  <b id="kvcBalance">0</b>
+                  <small>из 200</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="kvc-engrave">
+          <label class="kvc-engrave__label" for="kvcInput">Попробуйте — введите имя ребёнка</label>
+          <input id="kvcInput" class="kvc-engrave__input" type="text" placeholder="Например, Михаил" autocomplete="off" maxlength="32" />
+          <p class="kvc-engrave__hint">Имя автоматически будет выгравировано на&nbsp;карте при&nbsp;регистрации. Серийный номер уникальный.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MANIFESTO ============ -->
+  <section class="manifesto">
+    <div class="manifesto__photo"></div>
+    <div class="manifesto__overlay"></div>
+    <div class="container manifesto__container">
+      <h2 class="manifesto__title reveal">
+        Миссия<br/>Платформы<br/>технолидерства
+      </h2>
+      <div class="manifesto__body reveal">
+        <!-- T14 verbatim -->
+        <p>
+          Облегчать дорогу к&nbsp;знаниям и&nbsp;вдохновлять абитуриентов на&nbsp;выбор
+          инженерных профессий, делая обучение доступным и&nbsp;увлекательным
+          с&nbsp;помощью современных технологий и&nbsp;контента.
+        </p>
+        <!-- T15 verbatim -->
+        <p>
+          Мы&nbsp;объединяем усилия государства, образования и&nbsp;бизнеса
+          для&nbsp;формирования единой политики, обеспечивающей кадровый
+          суверенитет и&nbsp;технологическое лидерство страны.
+        </p>
+        <!-- T16 verbatim -->
+        <p class="manifesto__pull">
+          Наша цель — новое поколение инженеров и&nbsp;строителей XXI&nbsp;века
+          для&nbsp;суверенной и&nbsp;сильной России.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SUPPORT (G5) compact strip ============ -->
+  <section class="support" id="support">
+    <div class="container">
+      <div class="support__head reveal">
+        <h3 class="support__h">Кто оказывает поддержку мероприятию</h3>
+        <!-- [ДОБАВЛЕНИЕ G5 — placeholder, требует реальный список + логотипы] -->
+        <p class="support__lead">
+          Форум проводится при&nbsp;поддержке федеральных министерств в&nbsp;сфере просвещения,
+          образования и&nbsp;науки, ведущих технических университетов страны, государственных корпораций
+          технологической отрасли, региональных центров «Кванториум», Союза машиностроителей России
+          и&nbsp;Экспертного совета по&nbsp;технологическому образованию.
+        </p>
+      </div>
+      <div class="support__logos reveal">
+        <div class="support__logo">Минпросвещения<br/>России</div>
+        <div class="support__logo">Минобрнауки<br/>России</div>
+        <div class="support__logo">Сеть<br/>«Кванториум»</div>
+        <div class="support__logo">Союз<br/>машиностроителей</div>
+        <div class="support__logo">Экспертный<br/>совет</div>
+      </div>
+      <p class="support__note">логотипы — placeholder · окончательный список после согласований</p>
+    </div>
+  </section>
+
+  <!-- ============ JOIN STRIPE (T10) ============ -->
+  <section class="stripe stripe--ink">
+    <div class="container">
+      <div class="stripe__row">
+        <h3 class="stripe__title">Присоединяйтесь — мест на&nbsp;<span class="em">эфирах</span> ограничено.</h3>
+        <a href="#register" class="btn btn--primary">Посмотреть программу и записаться <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY persona toggle ============ -->
+  <section class="why" id="why">
+    <div class="container">
+      <div class="why__head reveal">
+        <p class="mono" style="color: var(--cinnabar); margin: 0 0 16px;">Почему вам стоит зайти</p>
+        <h2 class="display-l">Зачем приходить<br/>на&nbsp;форум.</h2>
+        <p class="why__sub">Выберите свою роль — увидите конкретно, что&nbsp;получите.</p>
+      </div>
+
+      <div class="why__tabs reveal" id="whyTabs">
+        <button class="why__tab is-active" data-panel="student">
+          <svg class="why__tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2 9 L12 4 L22 9 L12 14 Z"/>
+            <path d="M6 11 V16 C6 16, 9 18, 12 18 C 15 18, 18 16, 18 16 V11"/>
+            <line x1="22" y1="9" x2="22" y2="14"/>
+          </svg>Школьник
+        </button>
+        <button class="why__tab" data-panel="abiturient">
+          <svg class="why__tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 3 H 16 L 19 6 V 21 H 5 Z"/>
+            <path d="M16 3 V6 H19"/>
+            <line x1="8" y1="11" x2="14" y2="11"/>
+            <line x1="8" y1="14" x2="14" y2="14"/>
+            <circle cx="11" cy="18" r="1.6"/>
+          </svg>Абитуриент
+        </button>
+        <button class="why__tab" data-panel="parent">
+          <svg class="why__tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="8" cy="6" r="2.5"/>
+            <path d="M3 21 V18 C 3 16, 5 14, 8 14 C 11 14, 13 16, 13 18 V21"/>
+            <circle cx="17" cy="9" r="2"/>
+            <path d="M14 21 V19 C 14 17.5, 15.5 16.5, 17 16.5 C 18.5 16.5, 20 17.5, 20 19 V21"/>
+          </svg>Родитель
+        </button>
+      </div>
+
+      <div class="why__panel reveal" id="whyPanel">
+        <h3 class="why__panel-h" id="whyPanelTitle">Если ты школьник 13–17 лет</h3>
+        <ul class="why__panel-list" id="whyPanelList">
+          <li><span class="why__bullet">1</span><span>Услышишь от&nbsp;инженеров — не&nbsp;от&nbsp;учителей — чем они на&nbsp;самом деле занимаются</span></li>
+          <li><span class="why__bullet">2</span><span>Сможешь выбрать направление осознанно, а&nbsp;не&nbsp;«куда возьмут»</span></li>
+          <li><span class="why__bullet">3</span><span>Получишь именную «Кулибинскую карту» и&nbsp;скидки в&nbsp;кружках</span></li>
+          <li><span class="why__bullet">4</span><span>Сможешь решать задачи на&nbsp;эфирах и&nbsp;копить кулибинские баллы</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="final" id="register">
+    <div class="final__bg"></div>
+    <div class="container final__container">
+      <p class="final__counter reveal">
+        <span>До открытия</span>
+        <strong id="counterDays">—</strong>
+        <span>дней</span>
+      </p>
+      <h2 class="final__h reveal">
+        Неделя<br/>
+        <span class="accent">технолидерства.</span>
+      </h2>
+      <p class="final__sub reveal">
+        Бесплатное участие для&nbsp;зрителей. Уникальная возможность стать
+        первыми обладателями именной «Кулибинской карты».
+      </p>
+      <a href="#agenda" class="btn btn--primary btn--xl reveal">Посмотреть программу и записаться <span class="arrow">→</span></a>
+      <p class="final__micro reveal">Регистрация — 1&nbsp;минута · Без&nbsp;автоматических списаний</p>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__col">
+          <h4>Платформа технолидерства</h4>
+          <p>Образовательные траектории будущих инженеров.<br/>Социальные проекты, которые строят кадровый суверенитет страны.</p>
+        </div>
+        <div class="footer__col">
+          <h4>Форум</h4>
+          <ul>
+            <li><a href="#program">Программа</a></li>
+            <li><a href="#agenda">11 дней</a></li>
+            <li><a href="#card">Карта</a></li>
+            <li><a href="#why">Зачем</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Связь</h4>
+          <ul>
+            <li><a href="#">Контакты</a></li>
+            <li><a href="#">Telegram</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Юридическое</h4>
+          <ul>
+            <li><a href="#">Политика ПДн</a></li>
+            <li><a href="#">Согласие</a></li>
+            <li><a href="#">Оферта</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__strip">
+        © 2026 ПЛАТФОРМА ТЕХНОЛИДЕРСТВА · ПДН ОБРАБАТЫВАЮТСЯ В РОССИИ В СООТВЕТСТВИИ С 152-ФЗ
+      </div>
+    </div>
+  </footer>
+
+  <div class="draft-banner">черновик <strong>v2</strong> · лабораторный журнал</div>
+
+  <script>
+    // ============ Quiz hero ============
+    (function quiz() {
+      const messages = {
+        student: {
+          title: 'Школьник',
+          text: '<strong>Тебе 13–17 лет.</strong> На форуме — открытые эфиры с инженерами, конструкторами и теми, кто строит технологии. Слушай, спрашивай в чате, выполняй задания и получай кулибинские баллы.'
+        },
+        abiturient: {
+          title: 'Абитуриент',
+          text: '<strong>Ты выбираешь, куда поступать.</strong> На форуме — карта профессий новой индустрии до 2030 года, отличия ведущих технических вузов и истории тех, кто уже работает в технологическом лидерстве страны.'
+        },
+        parent: {
+          title: 'Родитель',
+          text: '<strong>Ребёнок 8–11 класс.</strong> Получите целостную картину инженерных направлений и стратегию выбора профессии. Карта работает на ребёнка следующие 5+ лет — до и после поступления.'
+        },
+        expert: {
+          title: 'Эксперт',
+          text: '<strong>Вы профессионал отрасли.</strong> Если хотите выступить или предложить тему эфира — напишите нам через раздел «Связь». На форуме мы открыты к&nbsp;сотрудничеству с&nbsp;Экспертным советом.'
+        }
+      };
+      const opts = document.querySelectorAll('.quiz__option');
+      const result = document.getElementById('quizResult');
+      const progress = document.getElementById('quizProgress');
+      opts.forEach(opt => {
+        opt.addEventListener('click', () => {
+          opts.forEach(o => o.classList.remove('is-active'));
+          opt.classList.add('is-active');
+          const role = opt.dataset.role;
+          const msg = messages[role];
+          result.innerHTML = msg.text;
+          result.classList.add('is-visible');
+          if (progress) progress.style.width = '100%';
+        });
+      });
+    })();
+
+    // ============ Blueprint readout ============
+    (function blueprint() {
+      const nodes = document.querySelectorAll('.node');
+      const readout = document.querySelector('.blueprint__readout-text');
+      const original = readout.innerHTML;
+      nodes.forEach(node => {
+        node.addEventListener('mouseenter', () => {
+          nodes.forEach(n => n.classList.remove('is-active'));
+          node.classList.add('is-active');
+          if (node.dataset.desc) readout.innerHTML = node.dataset.desc;
+        });
+      });
+      const blueprintEl = document.querySelector('.blueprint');
+      if (blueprintEl) {
+        blueprintEl.addEventListener('mouseleave', () => {
+          nodes.forEach(n => n.classList.remove('is-active'));
+          readout.innerHTML = original;
+        });
+      }
+    })();
+
+    // ============ Agenda carousel ============
+    (function agenda() {
+      const track = document.getElementById('agendaTrack');
+      const prev = document.getElementById('agendaPrev');
+      const next = document.getElementById('agendaNext');
+      if (!track) return;
+      const card = track.querySelector('.agenda-card');
+      const step = card ? card.offsetWidth + 16 : 320;
+      prev.addEventListener('click', () => track.scrollBy({ left: -step, behavior: 'smooth' }));
+      next.addEventListener('click', () => track.scrollBy({ left:  step, behavior: 'smooth' }));
+    })();
+
+    // ============ Persona panel toggle ============
+    (function whyToggle() {
+      const tabs = document.querySelectorAll('.why__tab');
+      const title = document.getElementById('whyPanelTitle');
+      const list = document.getElementById('whyPanelList');
+      const panel = document.getElementById('whyPanel');
+      const data = {
+        student: {
+          title: 'Если ты школьник 13–17 лет',
+          items: [
+            'Услышишь от&nbsp;инженеров — не&nbsp;от&nbsp;учителей — чем они на&nbsp;самом деле занимаются',
+            'Сможешь выбрать направление осознанно, а&nbsp;не&nbsp;«куда возьмут»',
+            'Получишь именную «Кулибинскую карту» и&nbsp;скидки в&nbsp;кружках',
+            'Сможешь решать задачи на&nbsp;эфирах и&nbsp;копить кулибинские баллы'
+          ]
+        },
+        abiturient: {
+          title: 'Если ты абитуриент',
+          items: [
+            'Увидишь карту профессий новой индустрии до&nbsp;2030 года',
+            'Услышишь, чем отличаются ведущие технические вузы и&nbsp;корпорации',
+            'Получишь Кулибинскую карту, которая работает в&nbsp;программах платного образования и&nbsp;консалтинга',
+            'Сможешь задать живые вопросы экспертам в&nbsp;чате эфира — без&nbsp;посредников'
+          ]
+        },
+        parent: {
+          title: 'Если вы родитель ребёнка 13–17 лет',
+          items: [
+            'Увидите весь ландшафт инженерных направлений глазами тех, кто в&nbsp;них работает',
+            'Поймёте, какие предметы и&nbsp;кружки реально открывают двери к&nbsp;профессии',
+            'Получите карту, которая работает на&nbsp;ребёнка 5+ лет — до&nbsp;и&nbsp;после поступления',
+            'Сможете задать живые вопросы экспертам в&nbsp;чате эфира'
+          ]
+        }
+      };
+      tabs.forEach(t => {
+        t.addEventListener('click', () => {
+          if (t.classList.contains('is-active')) return;
+          tabs.forEach(x => x.classList.remove('is-active'));
+          t.classList.add('is-active');
+          const key = t.dataset.panel;
+          const d = data[key];
+          panel.classList.add('is-fading');
+          setTimeout(() => {
+            title.innerHTML = d.title;
+            list.innerHTML = d.items.map((it, i) =>
+              `<li><span class="why__bullet">${i + 1}</span><span>${it}</span></li>`
+            ).join('');
+            panel.classList.remove('is-fading');
+          }, 200);
+        });
+      });
+    })();
+
+    // ============ Countdown ============
+    (function countdown() {
+      const target = new Date('2026-06-16T19:00:00+03:00');
+      const update = () => {
+        const days = Math.max(0, Math.ceil((target - new Date()) / 86400000));
+        const el = document.getElementById('counterDays');
+        if (el) el.textContent = days;
+      };
+      update();
+      setInterval(update, 60000);
+    })();
+
+    // ============ Stat count-up ============
+    (function statCount() {
+      const stats = document.querySelectorAll('[data-count]');
+      const animate = (el) => {
+        const target = parseInt(el.dataset.count, 10);
+        const duration = 1400;
+        const start = performance.now();
+        const tick = (t) => {
+          const p = Math.min(1, (t - start) / duration);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(eased * target);
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      };
+      const io = new IntersectionObserver(es => {
+        es.forEach(e => {
+          if (e.isIntersecting) {
+            animate(e.target);
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      stats.forEach(s => io.observe(s));
+    })();
+
+    // ============ Reveal ============
+    (function reveal() {
+      const items = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        items.forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
+      items.forEach(el => io.observe(el));
+    })();
+
+    // ============ Kulibin name engraving ============
+    (function kvcEngrave() {
+      const input = document.getElementById('kvcInput');
+      const display = document.getElementById('kvcOwner');
+      const balance = document.getElementById('kvcBalance');
+      const radial = document.getElementById('kvcRadial');
+      const number = document.getElementById('kvcNumber');
+      if (!input || !display) return;
+
+      const stableNumber = (str) => {
+        let h = 0;
+        for (let i = 0; i < str.length; i++) { h = (h << 5) - h + str.charCodeAt(i); h |= 0; }
+        const n = Math.abs(h).toString().padStart(8, '0').slice(0, 8);
+        return `${n.slice(0, 4)} ${n.slice(4)}`;
+      };
+
+      let timer;
+      input.addEventListener('input', e => {
+        const v = e.target.value.trim();
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          if (v.length === 0) {
+            display.textContent = 'введите имя ниже';
+            display.classList.add('is-placeholder');
+            balance.textContent = '0';
+            radial.style.strokeDashoffset = '175.93';
+            number.textContent = '0000 0347';
+          } else {
+            display.textContent = v.toUpperCase();
+            display.classList.remove('is-placeholder');
+            // simulate balance growth on engrave
+            const sim = Math.min(200, v.length * 25 + 25);
+            balance.textContent = sim;
+            radial.style.strokeDashoffset = (175.93 * (1 - sim / 200)).toFixed(2);
+            number.textContent = stableNumber(v);
+          }
+        }, 80);
+      });
+    })();
+
+    // ============ Kulibin card 3D tilt ============
+    (function kvcTilt() {
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (matchMedia('(hover: none)').matches) return;
+      const card = document.getElementById('kvc');
+      const frame = card?.parentElement;
+      if (!card || !frame) return;
+      frame.addEventListener('mousemove', e => {
+        const r = frame.getBoundingClientRect();
+        const x = ((e.clientX - r.left) / r.width)  - 0.5;
+        const y = ((e.clientY - r.top)  / r.height) - 0.5;
+        card.style.transform = `rotateX(${y * 8 + 2}deg) rotateY(${x * -12 - 4}deg)`;
+      });
+      frame.addEventListener('mouseleave', () => {
+        card.style.transform = 'rotateX(4deg) rotateY(-8deg)';
+      });
+    })();
+  </script>
+</body>
+</html>
