@@ -246,20 +246,20 @@
       position: absolute;
       inset: 0;
       z-index: 2;
-      background-image: url('https://images.unsplash.com/photo-1761195696518-6384573549ea?auto=format&fit=crop&w=1800&q=80');
+      background-image: url('https://anadevpm.github.io/techleader-week/hero.jpg');
       background-size: cover;
-      background-position: center right;
-      opacity: 0.30;
-      mix-blend-mode: luminosity;
-      filter: contrast(1.25) saturate(0);
+      background-position: right center;
+      opacity: 0.55;
+      mix-blend-mode: normal;
+      filter: saturate(0.92) contrast(1.05) brightness(0.92);
     }
     .hero__photo-tint {
       position: absolute;
       inset: 0;
       z-index: 3;
       background:
-        linear-gradient(90deg, var(--ink-deep) 30%, transparent 70%),
-        linear-gradient(180deg, transparent 60%, var(--ink-deep));
+        linear-gradient(90deg, var(--ink-deep) 32%, rgba(10, 15, 27, 0.55) 52%, rgba(10, 15, 27, 0.15) 75%, transparent 100%),
+        linear-gradient(180deg, transparent 55%, rgba(10, 15, 27, 0.92));
     }
     .hero__blueprint {
       position: absolute;
